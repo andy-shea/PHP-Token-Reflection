@@ -206,17 +206,18 @@ class ReflectionClass extends ReflectionElement implements IReflectionClass
 	public function getModifiers()
 	{
 		if (false === $this->modifiersComplete) {
-			if (($this->modifiers & InternalReflectionClass::IS_EXPLICIT_ABSTRACT) && !($this->modifiers & InternalReflectionClass::IS_IMPLICIT_ABSTRACT)) {
-				foreach ($this->getMethods() as $reflectionMethod) {
-					if ($reflectionMethod->isAbstract()) {
-						$this->modifiers |= InternalReflectionClass::IS_IMPLICIT_ABSTRACT;
-					}
-				}
+			// TODO: somehow this is adding static modifiers to class definitions
+			// if (($this->modifiers & InternalReflectionClass::IS_EXPLICIT_ABSTRACT) && !($this->modifiers & InternalReflectionClass::IS_IMPLICIT_ABSTRACT)) {
+			// 	foreach ($this->getMethods() as $reflectionMethod) {
+			// 		if ($reflectionMethod->isAbstract()) {
+			// 			$this->modifiers |= InternalReflectionClass::IS_IMPLICIT_ABSTRACT;
+			// 		}
+			// 	}
 
-				if (!empty($this->interfaces)) {
-					$this->modifiers |= InternalReflectionClass::IS_IMPLICIT_ABSTRACT;
-				}
-			}
+			// 	if (!empty($this->interfaces)) {
+			// 		$this->modifiers |= InternalReflectionClass::IS_IMPLICIT_ABSTRACT;
+			// 	}
+			// }
 
 			if (!empty($this->interfaces)) {
 				$this->modifiers |= self::IMPLEMENTS_INTERFACES;
